@@ -68,7 +68,7 @@ bonus:	$(OBJSBONUS)
 		@ranlib $(NAME)
 
 %.o: %.c $(LIBFT)
-		clang $(FLAGS) -c $< -o $@
+		clang $(FLAGS) -c $< -o $@ -I $(LIBFT)
 
 clean:
 		@/bin/rm -f $(OBJS) $(OBJSBONUS)

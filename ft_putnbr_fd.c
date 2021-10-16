@@ -6,16 +6,42 @@
 /*   By: ntitan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:29:54 by ntitan            #+#    #+#             */
-/*   Updated: 2021/10/14 17:29:55 by ntitan           ###   ########.fr       */
+/*   Updated: 2021/10/16 18:01:11 by ntitan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static int
+	ft_abs(int nbr)
 {
-	char	*s;
+	if (nbr < 0)
+		return (-nbr);
+	else
+		return (nbr);
+}
 
-	s = ft_itoa(n);
-	ft_putstr_fd(s, fd);
+void
+	ft_putnbr_fd(int n, int fd)
+{
+	char	str[13];
+	int		is_neg;
+	int		length;
+
+	is_neg = (n < 0);
+	ft_bzero(str, 13);
+	if (n == 0)
+		str[0] = '0';
+	length = 0;
+	while (n != 0)
+	{
+		str[length++] = '0' + ft_abs(n % 10);
+		n = (n / 10);
+	}
+	if (is_neg)
+		str[length] = '-';
+	else if (length > 0)
+		length--;
+	while (length >= 0)
+		write(fd, &str[length--], 1);
 }
