@@ -11,55 +11,44 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 
-int	ft_abs(int n)
+static	char	*ft_toarray(char *result, long long n, size_t len)
 {
-	if (n < 0)
-		return (n * (-1));
-	return (n);
-}
-
-int	ft_numlen(int nbr)
-{
-	size_t	buff;
 	size_t	i;
 
-	buff = 1;
 	i = 0;
-	while (nbr / buff > 0)
+	if (n < 0)
 	{
-		buff *= 10;
+		result[0] = '-';
+		n *= -1;
+	}
+	while (n)
+	{
+		result[len - 1 - i] = (n % 10) + '0';
 		i++;
+		n /= 10;
 	}
-	return (i);
+	result[len] = '\0';
+	return (result);
 }
 
-char	*ft_itoa(int nbr)
+char	*ft_itoa(int n)
 {
-	size_t	i;
-	char	*str;
-	int		negeg;
+	char		*result;
+	size_t		len;
+	long long	n_long;
 
-	negeg = (nbr < 0);
-	i = ft_numlen(nbr);
-	if (nbr == 0)
+	len = 0;
+	n_long = n;
+	if (n < 0)
+		len++;
+	while (n_long && ((len++) || 1))
+		n_long /= 10;
+	if (n == 0)
 		return (ft_strdup("0"));
-	str = (char *)malloc(sizeof(char) * (i + 1 + negeg));
-	if (!str)
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (result == NULL)
 		return (NULL);
-	str[i] = 0;
-	i--;
-	while (nbr)
-	{
-		str[i--] = '0' + (ft_abs(nbr % 10));
-		nbr /= 10;
-	}
-	if (negeg)
-		str[0] = '-';
-	return (str);
+	ft_toarray(result, n, len);
+	return (result);
 }
-/*int main()
-{
-	char *ans = ft_itoa(4151329);
-}*/

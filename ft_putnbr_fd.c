@@ -12,36 +12,28 @@
 
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (nbr < 0)
-		return (-nbr);
-	else
-		return (nbr);
-}
+	char		arr[10];
+	size_t		len;
+	long long	n_long;
 
-void
-	ft_putnbr_fd(int n, int fd)
-{
-	char	str[13];
-	int		is_neg;
-	int		length;
-
-	is_neg = (n < 0);
-	ft_bzero(str, 13);
-	if (n == 0)
-		str[0] = '0';
-	length = 0;
-	while (n != 0)
+	n_long = n;
+	if (n_long < 0)
 	{
-		str[length++] = '0' + ft_abs(n % 10);
-		n = (n / 10);
+		write(fd, "-", 1);
+		n_long *= -1;
 	}
-	if (is_neg)
-		str[length] = '-';
-	else if (length > 0)
-		length--;
-	while (length >= 0)
-		write(fd, &str[length--], 1);
+	else if (n_long == 0)
+	{
+		write(fd, "0", 1);
+		return ;
+	}
+	len = 0;
+	while (n_long)
+	{
+		arr[10 - 1 - (len++)] = '0' + n_long % 10;
+		n_long /= 10;
+	}
+	write(fd, arr + 10 - len, len);
 }
