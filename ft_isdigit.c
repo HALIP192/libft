@@ -16,17 +16,3 @@ int	ft_isdigit(int c)
 {
 	return (c <= '9' && c >= '0');
 }
-
-/*int main()
-{
-	int i;
-
-	i = 40;
-	while (i >= 40 && i <= 60)
-	{
-		printf("my: %c) %d\n", i, ft_isdigit(i));
-		printf("nemy: %c) %d\n", i, isdigit(i));
-		i++;
-	}
-	return (0);
-}*/

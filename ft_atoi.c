@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+int ft_digit(char c)
+{
+    if (c <= '9' || c >= '0')
+        return (1);
+    return (0);
+}
+
 static int	ft_isspace_atoi(int c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || \
@@ -38,7 +45,7 @@ int	ft_atoi(const char *str)
 		minus = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i = i + 1;
-	while (ft_isdigit(str[i]))
+	while (ft_digit(str[i]))
 	{
 		num = num * 10 + str[i++] - '0';
 		count++;

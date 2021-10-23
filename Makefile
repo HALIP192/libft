@@ -36,43 +36,36 @@ SRC =		\
 			ft_tolower		\
 			ft_toupper
 
-SRC_BONUS =	\
-			ft_lstadd_back_bonus	\
-			ft_lstadd_front_bonus	\
-			ft_lstclear_bonus		\
-			ft_lstdelone_bonus		\
-			ft_lstiter_bonus		\
-			ft_lstlast_bonus		\
-			ft_lstmap_bonus			\
-			ft_lstnew_bonus			\
-			ft_lstsize_bonus
-
+BONUS			=	ft_lstadd_back    \
+                    ft_lstadd_front   \
+                    ft_lstclear       \
+					ft_lstdelone      \
+                    ft_lstiter        \
+                    ft_lstlast        \
+					ft_lstmap         \
+                    ft_lstnew         \
+                    ft_lstsize_bonus
 OBJS_DIR =	objects
 
 .PHONY:		all clean fclean bonus re
 
-OBJ =		${addprefix ${OBJS_DIR}/,${SRC:=.o}}
-OBJ_BONUS =	${addprefix ${OBJS_DIR}/,${SRC_BONUS:=.o}}
+OBJ =		${SRC:=.o}
+OBJ_BONUS =	${BONUS:=.o}
 
 CFLAGS =	-Wall -Wextra -Werror -g 
 #-O3 -ffast-math
 CC =		gcc
-PARALLEL = -j
 
-$(OBJS_DIR)/%.o: %.c		
+%.o: %.c		
 	${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME):	${OBJS_DIR} ${OBJ}
+$(NAME):	 ${OBJ}
 	ar cr ${NAME} ${OBJ}
 
-all:	#$(NAME)
-		$(MAKE) $(PARALLEL) $(NAME)
+all:    $(NAME)
 
-bonus:		${OBJ} ${OBJ_BONUS}
-	ar cr ${NAME} ${OBJ} ${OBJ_BONUS}
-
-${OBJS_DIR}:
-	mkdir -p ${OBJS_DIR}
+bonus:	 ${OBJ_BONUS}
+	ar cr ${NAME} ${OBJ_BONUS}
 
 clean:
 	rm -rf ${OBJ} ${OBJ_BONUS}
