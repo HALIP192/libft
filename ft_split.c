@@ -6,13 +6,13 @@
 /*   By: ntitan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:28:36 by ntitan            #+#    #+#             */
-/*   Updated: 2021/10/16 17:47:48 by ntitan           ###   ########.fr       */
+/*   Updated: 2021/10/23 16:20:10 by ntitan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t  words_alloc(char const *s, char c)
+size_t	words_alloc(char const *s, char c)
 {
 	size_t	count;
 
@@ -31,7 +31,7 @@ size_t  words_alloc(char const *s, char c)
 
 void	*ft_free_4split(char **split, size_t id)
 {
-    while (id--)
+	while (id--)
 		free(split[id]);
 	free(split);
 	return (NULL);

@@ -36,25 +36,25 @@ SRC =		\
 			ft_tolower		\
 			ft_toupper
 
-BONUS			=	ft_lstadd_back    \
-                    ft_lstadd_front   \
-                    ft_lstclear       \
-					ft_lstdelone      \
-                    ft_lstiter        \
-                    ft_lstlast        \
-					ft_lstmap         \
-                    ft_lstnew         \
+BONUS			=	ft_lstadd_back_bonus    \
+                    ft_lstadd_front_bonus   \
+                    ft_lstclear_bonus       \
+					ft_lstdelone_bonus      \
+                    ft_lstiter_bonus        \
+                    ft_lstlast_bonus        \
+					ft_lstmap_bonus         \
+                    ft_lstnew_bonus         \
                     ft_lstsize_bonus
-OBJS_DIR =	objects
 
 .PHONY:		all clean fclean bonus re
 
 OBJ =		${SRC:=.o}
 OBJ_BONUS =	${BONUS:=.o}
 
-CFLAGS =	-Wall -Wextra -Werror -g 
+CFLAGS =	-Wall -Wextra -Werror 
 #-O3 -ffast-math
 CC =		gcc
+PAR = -j
 
 %.o: %.c		
 	${CC} ${CFLAGS} -c $< -o $@
@@ -62,7 +62,8 @@ CC =		gcc
 $(NAME):	 ${OBJ}
 	ar cr ${NAME} ${OBJ}
 
-all:    $(NAME)
+all:
+	${MAKE} ${NAME} ${PAR}
 
 bonus:	 ${OBJ_BONUS}
 	ar cr ${NAME} ${OBJ_BONUS}
