@@ -56,17 +56,17 @@ CFLAGS =	-Wall -Wextra -Werror
 CC =		gcc
 PAR = -j
 
-%.o: %.c		
+%.o: %.c Makefile
 	${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME):	 ${OBJ}
+$(NAME):	 ${OBJ} libft.h
 	ar cr ${NAME} ${OBJ}
 
 all:
 	${MAKE} ${NAME} ${PAR}
 
-bonus:	 ${OBJ_BONUS}
-	ar cr ${NAME} ${OBJ_BONUS}
+bonus:	 ${OBJ_BONUS} libft.h
+	ar cr ${NAME} ${OBJ_BONUS} 
 
 clean:
 	rm -rf ${OBJ} ${OBJ_BONUS}
